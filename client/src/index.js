@@ -4,12 +4,29 @@ import {Provider} from 'react-redux';
 import {store} from './app/store';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
+import {CssBaseline} from '@mui/material';
+import {ThemeProvider, createTheme} from '@mui/material/styles';
 import './index.css';
+
+const theme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+      body {
+        background: #f0f2f5;
+      }
+      `,
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

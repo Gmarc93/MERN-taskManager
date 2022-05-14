@@ -1,6 +1,9 @@
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getTasks, updateTask, deleteTask} from './tasksSlice';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
 
 export default function TasksList() {
   const dispatch = useDispatch();
@@ -26,9 +29,12 @@ export default function TasksList() {
           }
         }}
       />
-      <button onClick={() => dispatch(deleteTask({id: task._id}))}>
-        Delete
-      </button>
+      <IconButton
+        color="primary"
+        onClick={() => dispatch(deleteTask({id: task._id}))}
+      >
+        <DeleteIcon />
+      </IconButton>
     </div>
   ));
 

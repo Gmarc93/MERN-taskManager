@@ -3,6 +3,12 @@ import {logout} from '../auth/authSlice';
 import {resetTasks} from '../tasks/tasksSlice';
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {Button, Toolbar} from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import {IconButton} from '@mui/material';
+import {AppBar} from '@mui/material';
+import Box from '@mui/material/Box';
+import {Typography} from '@mui/material';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -17,27 +23,37 @@ export default function Navbar() {
   }, [user?.name]);
 
   function onClickLogout() {
-    dispatch(logout());
-    dispatch(resetTasks());
+    if (user) {
+      dispatch(logout());
+      dispatch(resetTasks());
+      // navigate('/');
+    }
+
     navigate('/');
   }
 
   return (
-    <nav>
-      {user ? (
-        <>
-          <h1>
-            Hello,{' '}
-            {firstName.replace(firstName[0], firstName[0]?.toUpperCase())}!
-          </h1>
-          <button onClick={onClickLogout}>Log Out</button>
-        </>
-      ) : (
-        <>
-          {' '}
-          <h1>Welcome to TaskManager2!</h1>
-        </>
-      )}
-    </nav>
+    <Box sx={{flexGrow: 1}}>
+      <AppBar position="static">
+        <Toolbar>
+          <Box sx={{flexGrow: 1}}>
+            <Typography
+              color="inherit"
+              variant="h6"
+              component="a"
+              href="/"
+              sx={{textDecoration: 'none'}}
+            >
+              TaskManager
+            </Typography>
+          </Box>
+          {user && (
+            <Button color="inherit" onClick={onClickLogout}>
+              Log Out
+            </Button>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }

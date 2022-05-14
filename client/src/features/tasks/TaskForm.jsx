@@ -3,6 +3,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {createTask} from './tasksSlice';
 import {logout} from '../auth/authSlice';
 import {resetTasks} from './tasksSlice';
+import {Button} from '@mui/material';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import IconButton from '@mui/material/IconButton';
 
 export default function TaskForm() {
   const dispatch = useDispatch();
@@ -36,7 +39,14 @@ export default function TaskForm() {
             onChange={(e) => setTask(e.target.value)}
             autoFocus
           />
-          <button>Create Task</button>
+          <Button
+            type="submit"
+            size="small"
+            color="primary"
+            variant="contained"
+          >
+            <AddOutlinedIcon />
+          </Button>
         </div>
       </form>
     </>

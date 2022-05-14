@@ -7,6 +7,7 @@ import Navbar from '../features/UI/Navbar';
 import TasksPage from '../features/tasks/TasksPage';
 import Auth from '../features/auth/Auth';
 import {loadToken} from '../features/auth/authSlice';
+import {Container} from '@mui/material';
 
 function App() {
   const dispatch = useDispatch();
