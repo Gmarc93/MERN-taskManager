@@ -8,6 +8,7 @@ import TasksPage from '../features/tasks/TasksPage';
 import Auth from '../features/auth/Auth';
 import {loadToken} from '../features/auth/authSlice';
 import {Container} from '@mui/material';
+import Copyright from '../features/UI/Copyright';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element={<Auth />} />
           )}
         </Routes>
+        <Copyright sx={{mt: 8, mb: 4}} />
       </Router>
     </>
   );

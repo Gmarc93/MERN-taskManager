@@ -3,7 +3,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getTasks, updateTask, deleteTask} from './tasksSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Grid,
+  Paper,
+} from '@mui/material';
 
 export default function TasksList() {
   const dispatch = useDispatch();
@@ -17,8 +24,8 @@ export default function TasksList() {
   }, []);
 
   let tasksArray = tasks.map((task) => (
-    <div key={task._id}>
-      <input
+    <ListItem key={task._id} sx={{padding: 0}}>
+      <ListItemButton
         type="text"
         defaultValue={task.content}
         readOnly={readOnly}
@@ -28,20 +35,27 @@ export default function TasksList() {
             dispatch(updateTask({id: task._id, content: e.target.value}));
           }
         }}
-      />
-      <IconButton
-        color="primary"
-        onClick={() => dispatch(deleteTask({id: task._id}))}
       >
-        <DeleteIcon />
-      </IconButton>
-    </div>
+        <ListItemText>{task.content}</ListItemText>
+
+        <IconButton
+          edge="end"
+          color="primary"
+          onClick={() => dispatch(deleteTask({id: task._id}))}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </ListItemButton>
+    </ListItem>
   ));
 
   return (
-    <>
-      <h2>Tasks List</h2>
-      {tasksArray}
-    </>
+    <Paper elevation={0} sx={{mt: 4}}>
+      <Grid container justifyContent="center" spacing={0}>
+        <Grid item xs={12}>
+          <List sx={{padding: 0}}>{tasksArray}</List>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 }
